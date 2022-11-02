@@ -1,0 +1,6 @@
+.landing_page_wrapper {
+	display: flex;
+	flex-direction: column;
+	background-color: black;
+	align-items: center;
+}
