@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import TripContext from "../../context/Context";
 import styles from "./TripList.module.css";
 export default function TripList({ trips }) {
+	const { currentTrip, setCurrentTrip } = useContext(TripContext);
 	const navigate = useNavigate();
-	const navigateToRegister = () => {
+	const navigateToRegister = trip => {
 		navigate("/reservation");
+		setCurrentTrip(trip);
 	};
 
 	return (
@@ -19,7 +23,12 @@ export default function TripList({ trips }) {
 						<p>
 							{trip.price}$ <sub>Baggage fee not included</sub>
 						</p>
-						<button className={styles.button} onClick={navigateToRegister}>
+						<button
+							className={styles.button}
+							onClick={() => {
+								navigateToRegister(trip);
+							}}
+						>
 							Book this trip
 						</button>
 					</div>

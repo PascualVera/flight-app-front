@@ -1,0 +1,25 @@
+.reservation_container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
+.dynamic_bg {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	filter: blur(20px);
+	z-index: -1;
+}
+.dynamic_bg img {
+	width: 100vw;
+	height: auto;
+	object-fit: cover;
+}
