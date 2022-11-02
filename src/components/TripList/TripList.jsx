@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TripList.module.css";
 export default function TripList({ trips }) {
@@ -6,9 +5,6 @@ export default function TripList({ trips }) {
 	const navigateToRegister = () => {
 		navigate("/reservation");
 	};
-	useEffect(() => {
-		console.log(trips);
-	});
 
 	return (
 		<section className={styles.trip_list}>
@@ -23,7 +19,9 @@ export default function TripList({ trips }) {
 						<p>
 							{trip.price}$ <sub>Baggage fee not included</sub>
 						</p>
-						<button onClick={navigateToRegister}>Book this trip</button>
+						<button className={styles.button} onClick={navigateToRegister}>
+							Book this trip
+						</button>
 					</div>
 				</article>
 			))}

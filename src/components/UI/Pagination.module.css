@@ -1,0 +1,35 @@
+.pagination {
+	display: flex;
+	gap: 1vh;
+}
+.pagination ul {
+	display: flex;
+	gap: 1vh;
+}
+.pagination li {
+	list-style: none;
+}
+.pagination li:hover {
+	color: gray;
+}
+
+.pagination li button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	font-size: 1.2rem;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+.active {
+	color: rgb(163, 163, 255);
+	background: none;
+	border: none;
+}
+.unused {
+	color: rgb(255, 255, 255);
+	background: none;
+	border: none;
+}
