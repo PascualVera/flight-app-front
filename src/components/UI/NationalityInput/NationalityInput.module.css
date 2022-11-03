@@ -8,3 +8,6 @@
 .input:focus {
 	border-color: rgb(67, 67, 226);
 }
+.input option:hover {
+	background-color: black;
+}
