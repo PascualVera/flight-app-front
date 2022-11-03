@@ -6,3 +6,20 @@
 	box-sizing: border-box;
 	font-family: "Roboto", sans-serif;
 }
+::-webkit-scrollbar {
+	width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: grey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: black;
+}

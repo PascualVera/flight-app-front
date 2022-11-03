@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Bill from "../../components/Bill/Bill";
 import ReservationForm from "../../components/ReservationForm/ReservationForm";
 import TripContext from "../../context/Context";
@@ -6,13 +6,11 @@ import styles from "./Reservation.module.css";
 export default function Reservation() {
 	const [passengers, setPassengers] = useState([]);
 	const { currentTrip } = useContext(TripContext);
-	useEffect(() => {
-		console.log(passengers);
-	}, [passengers]);
 
 	const addPassenger = passenger => {
 		setPassengers(() => {
-			return [passenger, ...passengers];
+			const passengerList = [passenger, ...passengers];
+			return [...passengerList];
 		});
 	};
 	return (
@@ -22,7 +20,7 @@ export default function Reservation() {
 			</div>
 
 			<ReservationForm addPassenger={addPassenger} />
-			<Bill />
+			<Bill passengers={passengers} />
 		</main>
 	);
 }

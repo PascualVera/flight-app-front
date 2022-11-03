@@ -1,6 +1,8 @@
+import styles from "./NationalityInput.module.css";
+
 export default function NationalityInput() {
 	return (
-		<select name="nationality">
+		<select className={styles.input} name="nationality">
 			<option value="afghan">Afghan</option>
 			<option value="albanian">Albanian</option>
 			<option value="algerian">Algerian</option>
