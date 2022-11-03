@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Bill from "../../components/Bill/Bill";
 import ReservationForm from "../../components/ReservationForm/ReservationForm";
 import TripContext from "../../context/Context";
@@ -6,7 +6,9 @@ import styles from "./Reservation.module.css";
 export default function Reservation() {
 	const [passengers, setPassengers] = useState([]);
 	const { currentTrip } = useContext(TripContext);
-
+	useEffect(() => {
+		console.log(passengers);
+	}, [passengers]);
 	const addPassenger = passenger => {
 		setPassengers(() => {
 			const passengerList = [passenger, ...passengers];

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FilterBar from "../../components/FilterBar/FilterBar";
 import Header from "../../components/Header/Header";
 import TripList from "../../components/TripList/TripList";
 import Pagination from "../../components/UI/Pagination";
@@ -35,6 +36,7 @@ export default function LandingPage() {
 	return (
 		<main className={styles.landing_page_wrapper}>
 			<Header />
+			<FilterBar />
 
 			{!isLoading && <TripList trips={currentTrips} />}
 			{!isLoading && (

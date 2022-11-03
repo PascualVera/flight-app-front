@@ -13,9 +13,19 @@
 	gap: 1.5em;
 	width: 60%;
 }
-.input_container input {
+.input_container .input {
 	font-size: 1.2em;
 	padding-left: 0.4em;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid grey;
+}
+.input_container :last-child {
+	gap: 0.2em;
+}
+
+.input:focus {
+	border-color: rgb(67, 67, 226);
 }
 .button {
 	font-size: 1em;
