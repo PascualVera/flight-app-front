@@ -21,7 +21,9 @@ export default function TripList({ trips }) {
             <div className={styles.info_wrapper}>
               <p>Trip to {trip.destination.name}</p>
               <p>From {trip.origin.name} </p>
+              <p>{new Date(trip.dateTime).toUTCString()}</p>
               <p>
+                {console.error(trip)}
                 {trip.price}$ <sub>Baggage fee not included</sub>
               </p>
               <button
