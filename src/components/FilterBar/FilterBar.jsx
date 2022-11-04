@@ -6,8 +6,9 @@ import plane_icon from "../../assets/plane_icon.png";
 import Form from "react-bootstrap/Form";
 import { getPlacesAll } from "../../services/DataFetching";
 import { useEffect, useState, useRef } from "react";
+import { getTrips } from "../../services/DataFetching";
 
-export default function FilterBar() {
+export default function FilterBar(props) {
   const [places, setPlaces] = useState(null);
   const [originPlaces, setOriginPlaces] = useState(null);
   const [destinationPlaces, setDestinationPlaces] = useState(null);
@@ -19,17 +20,12 @@ export default function FilterBar() {
       setPlaces(data);
 
       setOriginPlaces(
-        data
-          // .filter((place) => place.name != destinationSelect.current.value)
-          .map((place, index) => (
-            // <option key={index} value={place.id}>
-            <option key={index} value={place.name}>
-              {place.name}
-            </option>
-          ))
+        data.map((place, index) => (
+          <option key={index} value={place.name}>
+            {place.name}
+          </option>
+        ))
       );
-
-      // destinationPlaces.unshift({name: "-----"});
 
       setDestinationPlaces(
         data
@@ -44,32 +40,84 @@ export default function FilterBar() {
   }, []);
 
   const exchangeCities = () => {
+    if (
+      originSelect.current.value === destinationSelect.current.value &&
+      originSelect.current.value !== "" &&
+      destinationSelect.current.value !== ""
+    ) {
+      originSelect.current.value = "";
+      destinationSelect.current.value = "";
+    }
     setOriginPlaces(
       places
         .filter((place) => place.name != destinationSelect.current.value)
-        .map((place, index) => (
-          <option key={index} value={place.name}>
-            {place.name}
-          </option>
-        ))
+        .map((place, index) => {
+          return place.name == originSelect.current.value ? (
+            <option key={index} value={place.name} selected>
+              {place.name}
+            </option>
+          ) : (
+            <option key={index} value={place.name}>
+              {place.name}
+            </option>
+          );
+        })
     );
     setDestinationPlaces(
       places
         .filter((place) => place.name != originSelect.current.value)
-        .map((place, index) => (
-          <option key={index} value={place.name}>
-            {place.name}
-          </option>
-        ))
+        .map((place, index) => {
+          return place.name == destinationSelect.current.value ? (
+            <option key={index} value={place.name} selected>
+              {place.name}
+            </option>
+          ) : (
+            <option key={index} value={place.name}>
+              {place.name}
+            </option>
+          );
+        })
     );
   };
 
   const originSelectOnChange = (value) => {
     exchangeCities();
+
+    const originSelectedValue = originSelect.current.value;
+    const destinationSelectedValue = destinationSelect.current.value;
+    if (originSelectedValue) {
+      if (!destinationSelectedValue) {
+        getTrips(`origin/${originSelectedValue}`).then((data) => {
+          props.updateTrips(data);
+        });
+      } else {
+        getTrips(
+          `itinerary/from/${originSelectedValue}/to/${destinationSelectedValue}`
+        ).then((data) => {
+          props.updateTrips(data);
+        });
+      }
+    }
   };
 
   const destinationSelectOnChange = (value) => {
     exchangeCities();
+
+    const originSelectedValue = originSelect.current.value;
+    const destinationSelectedValue = destinationSelect.current.value;
+    if (destinationSelectedValue) {
+      if (!originSelectedValue) {
+        getTrips(`destination/${destinationSelectedValue}`).then((data) => {
+          props.updateTrips(data);
+        });
+      } else {
+        getTrips(
+          `itinerary/from/${originSelectedValue}/to/${destinationSelectedValue}`
+        ).then((data) => {
+          props.updateTrips(data);
+        });
+      }
+    }
   };
 
   return (
@@ -91,9 +139,10 @@ export default function FilterBar() {
               ref={originSelect}
               name="origin"
               onChange={originSelectOnChange}
-              style={{width: "150px"}}
+              style={{ width: "150px" }}
+              defaultValue=""
             >
-              <option selected value=""></option>
+              <option value=""></option>
               {originPlaces}
             </Form.Select>
           </div>
@@ -103,9 +152,10 @@ export default function FilterBar() {
               ref={destinationSelect}
               name="destination"
               onChange={destinationSelectOnChange}
-              style={{width: "150px"}}
+              style={{ width: "150px" }}
+              defaultValue=""
             >
-              <option selected value=""></option>
+              <option value=""></option>
               {destinationPlaces}
             </Form.Select>
           </div>

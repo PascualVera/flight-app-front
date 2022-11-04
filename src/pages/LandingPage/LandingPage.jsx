@@ -23,6 +23,10 @@ export default function LandingPage() {
 		setCurrentPage(pageNumber);
 	};
 
+	const updateTrips = (trips) => {
+		setTrips(trips);
+	}
+
 	////////PAGINATION SETUPS
 	useEffect(() => {
 		getTrips(queryParam)
@@ -35,7 +39,7 @@ export default function LandingPage() {
 	}, [queryParam]);
 	return (
 		<main className={styles.landing_page_wrapper}>
-			<FilterBar />
+			<FilterBar updateTrips={updateTrips} />
 			<Header />
 
 			{!isLoading && <TripList trips={currentTrips} />}
