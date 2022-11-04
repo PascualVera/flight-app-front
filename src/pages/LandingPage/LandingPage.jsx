@@ -35,8 +35,8 @@ export default function LandingPage() {
 	}, [queryParam]);
 	return (
 		<main className={styles.landing_page_wrapper}>
-			<Header />
 			<FilterBar />
+			<Header />
 
 			{!isLoading && <TripList trips={currentTrips} />}
 			{!isLoading && (
